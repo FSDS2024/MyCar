@@ -3,12 +3,14 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>My Car Tracker</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -30,9 +32,6 @@
         .header-content {
             max-width: 1000px;
             margin: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .logo {
@@ -40,19 +39,101 @@
             font-weight: bold;
         }
 
-        .login-btn {
+        main {
+            max-width: 700px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .setup-card {
             background: white;
-            color: #111827;
-            border: none;
-            padding: 9px 18px;
-            border-radius: 7px;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .setup-card h1 {
+            margin-bottom: 10px;
+        }
+
+        .setup-card p {
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        .step-number {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .step h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #111827;
+        }
+
+        .next-btn,
+        .back-btn {
+            padding: 13px 20px;
+            border-radius: 8px;
+            font-size: 15px;
             cursor: pointer;
         }
 
-        main {
-            max-width: 1000px;
-            margin: auto;
-            padding: 30px 20px;
+        .next-btn {
+            background: #111827;
+            color: white;
+            border: none;
+        }
+
+        .back-btn {
+            background: white;
+            border: 1px solid #d1d5db;
+            margin-right: 10px;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.active {
+            display: block;
         }
 
         .welcome {
@@ -148,10 +229,6 @@
             border: 1px solid #d1d5db;
         }
 
-        .btn:hover {
-            opacity: 0.85;
-        }
-
         .activity {
             padding: 25px;
         }
@@ -183,6 +260,7 @@
         }
 
         @media (max-width: 600px) {
+
             .stats {
                 grid-template-columns: 1fr;
             }
@@ -198,32 +276,216 @@
             .car-details {
                 flex-direction: column;
             }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <header>
+<header>
 
-        <div class="header-content">
+    <div class="header-content">
 
-            <div class="logo">
-                🚗 My Car Tracker
+        <div class="logo">
+            🚗 My Car Tracker
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+    <!-- ========================= -->
+    <!-- CAR SETUP -->
+    <!-- ========================= -->
+
+    <div id="setup" class="setup-card">
+
+        <h1>Let's set up your car 🚗</h1>
+
+        <p>
+            First, enter some basic information about your car.
+        </p>
+
+
+        <!-- STEP 1 -->
+
+        <div id="step1" class="step active">
+
+            <div class="step-number">
+                Step 1 of 2
             </div>
 
-            <button
-                class="login-btn"
-                onclick="login()">
-                Login
-            </button>
+            <h2>Car Details</h2>
+
+
+            <div class="form-group">
+
+                <label for="carName">
+                    Car Name / Model
+                </label>
+
+                <input
+                    type="text"
+                    id="carName"
+                    placeholder="Example: Altroz"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="brand">
+                    Brand
+                </label>
+
+                <input
+                    type="text"
+                    id="brand"
+                    placeholder="Example: Tata"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="purchaseDate">
+                    Date of Purchase
+                </label>
+
+                <input
+                    type="date"
+                    id="purchaseDate"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="fuelType">
+                    Fuel Type
+                </label>
+
+                <select id="fuelType">
+
+                    <option value="">
+                        Select fuel type
+                    </option>
+
+                    <option value="Petrol">
+                        Petrol
+                    </option>
+
+                    <option value="Diesel">
+                        Diesel
+                    </option>
+
+                    <option value="CNG">
+                        CNG
+                    </option>
+
+                    <option value="Electric">
+                        Electric
+                    </option>
+
+                    <option value="Hybrid">
+                        Hybrid
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    class="next-btn"
+                    onclick="goToOdometer()">
+
+                    Next →
+
+                </button>
+
+            </div>
 
         </div>
 
-    </header>
 
 
-    <main>
+        <!-- STEP 2 -->
+
+        <div id="step2" class="step">
+
+            <div class="step-number">
+                Step 2 of 2
+            </div>
+
+            <h2>Current Odometer</h2>
+
+            <p>
+                Enter the current odometer reading of your car.
+            </p>
+
+
+            <div class="form-group">
+
+                <label for="odometer">
+                    Odometer Reading (km)
+                </label>
+
+                <input
+                    type="number"
+                    id="odometer"
+                    placeholder="Example: 11000"
+                    min="0"
+                >
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    class="back-btn"
+                    onclick="goToCarDetails()">
+
+                    ← Back
+
+                </button>
+
+
+                <button
+                    class="next-btn"
+                    onclick="finishSetup()">
+
+                    Finish Setup ✓
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================= -->
+    <!-- DASHBOARD -->
+    <!-- ========================= -->
+
+    <div id="dashboard" class="dashboard">
 
         <section class="welcome">
 
@@ -232,7 +494,7 @@
             </h1>
 
             <p>
-                Track your car, fuel, mileage and service and many more .
+                Track your car, fuel, mileage, trips and service.
             </p>
 
         </section>
@@ -241,28 +503,30 @@
         <section class="car-card">
 
             <h2>
-                My Car 
+                My Car
             </h2>
 
+
             <div class="car-details">
+
 
                 <div class="car-detail">
 
                     Car
 
-                    <strong>
-                        Tata Altroz
+                    <strong id="dashboardCar">
+                        -
                     </strong>
 
-                </div> 
+                </div>
 
 
                 <div class="car-detail">
 
                     Odometer
 
-                    <strong>
-                        11000 km
+                    <strong id="dashboardOdometer">
+                        -
                     </strong>
 
                 </div>
@@ -272,8 +536,19 @@
 
                     Fuel Type
 
-                    <strong>
-                        Diesel
+                    <strong id="dashboardFuel">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="car-detail">
+
+                    Purchase Date
+
+                    <strong id="dashboardPurchaseDate">
+                        -
                     </strong>
 
                 </div>
@@ -283,7 +558,9 @@
         </section>
 
 
+
         <section class="stats">
+
 
             <div class="stat-card">
 
@@ -292,7 +569,7 @@
                 </p>
 
                 <h2>
-                    ₹3,200
+                    ₹0
                 </h2>
 
             </div>
@@ -305,15 +582,18 @@
                 </p>
 
                 <h2>
-                    18.5 km/l
+                    0 km/l
                 </h2>
 
             </div>
 
+
         </section>
 
 
+
         <section class="actions">
+
 
             <button
                 class="btn primary"
@@ -321,14 +601,16 @@
 
                 + Add Fuel
 
-            </button> 
+            </button>
 
 
-            <button 
-                Class="btn third"
+            <button
+                class="btn primary"
                 onclick="addTrip()">
-                + trip 
-            </button> 
+
+                + Add Trip
+
+            </button>
 
 
             <button
@@ -339,9 +621,9 @@
 
             </button>
 
+
         </section>
 
-        
 
 
         <section class="activity">
@@ -356,70 +638,222 @@
                 <div>
 
                     <div class="activity-type">
-                        Fuel
-                    </div>
-
-                    <div class="activity-info">
-                        35 litres
-                    </div>
-
-                </div>
-
-                <strong>
-                    ₹3,200
-                </strong>
-
-            </div>
-
-
-            <div class="activity-row">
-
-                <div>
-
-                    <div class="activity-type">
                         Odometer
                     </div>
 
                     <div class="activity-info">
-                        Current reading
+                        Initial reading
                     </div>
 
                 </div>
 
-                <strong>
-                    25,000 km
+
+                <strong id="activityOdometer">
+                    -
                 </strong>
 
             </div>
 
         </section>
 
-    </main>
+    </div>
+
+</main>
 
 
-    <script>
 
-        function login() {
+<script>
 
-            alert("Login page will be added next.");
+
+    // ============================
+    // STEP 1 → STEP 2
+    // ============================
+
+    function goToOdometer() {
+
+        const carName =
+            document.getElementById("carName").value;
+
+        const brand =
+            document.getElementById("brand").value;
+
+        const purchaseDate =
+            document.getElementById("purchaseDate").value;
+
+        const fuelType =
+            document.getElementById("fuelType").value;
+
+
+        if (carName === "") {
+
+            alert("Please enter your car name/model.");
+
+            return;
 
         }
 
 
-        function addFuel() {
+        if (brand === "") {
 
-            alert("Add Fuel page will be added next.");
+            alert("Please enter the car brand.");
+
+            return;
+
+        }
+
+
+        if (purchaseDate === "") {
+
+            alert("Please select the purchase date.");
+
+            return;
 
         }
 
 
-        function addOdometer() {
+        if (fuelType === "") {
 
-            alert("Add Odometer page will be added next.");
+            alert("Please select the fuel type.");
+
+            return;
 
         }
 
-    </script>
+
+        document
+            .getElementById("step1")
+            .classList.remove("active");
+
+
+        document
+            .getElementById("step2")
+            .classList.add("active");
+
+    }
+
+
+
+    // ============================
+    // STEP 2 → STEP 1
+    // ============================
+
+    function goToCarDetails() {
+
+        document
+            .getElementById("step2")
+            .classList.remove("active");
+
+
+        document
+            .getElementById("step1")
+            .classList.add("active");
+
+    }
+
+
+
+    // ============================
+    // FINISH SETUP
+    // ============================
+
+    function finishSetup() {
+
+        const odometer =
+            document.getElementById("odometer").value;
+
+
+        if (odometer === "") {
+
+            alert("Please enter the current odometer reading.");
+
+            return;
+
+        }
+
+
+        // Get all values
+
+        const carName =
+            document.getElementById("carName").value;
+
+        const brand =
+            document.getElementById("brand").value;
+
+        const purchaseDate =
+            document.getElementById("purchaseDate").value;
+
+        const fuelType =
+            document.getElementById("fuelType").value;
+
+
+
+        // Show data on dashboard
+
+        document.getElementById("dashboardCar").textContent =
+            brand + " " + carName;
+
+
+        document.getElementById("dashboardOdometer").textContent =
+            Number(odometer).toLocaleString() + " km";
+
+
+        document.getElementById("dashboardFuel").textContent =
+            fuelType;
+
+
+        document.getElementById("dashboardPurchaseDate").textContent =
+            purchaseDate;
+
+
+        document.getElementById("activityOdometer").textContent =
+            Number(odometer).toLocaleString() + " km";
+
+
+
+        // Hide setup
+
+        document
+            .getElementById("setup")
+            .style.display = "none";
+
+
+        // Show dashboard
+
+        document
+            .getElementById("dashboard")
+            .classList.add("active");
+
+    }
+
+
+
+    // ============================
+    // FUTURE FEATURES
+    // ============================
+
+    function addFuel() {
+
+        alert("Fuel entry will be added next.");
+
+    }
+
+
+    function addTrip() {
+
+        alert("Trip feature will be added next.");
+
+    }
+
+
+    function addOdometer() {
+
+        alert("Odometer entry will be added next.");
+
+    }
+
+
+</script>
+
 
 </body>
 
